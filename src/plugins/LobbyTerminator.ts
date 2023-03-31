@@ -11,7 +11,7 @@ export class LobbyTerminator extends LobbyPlugin {
   option: LobbyTerminatorOption;
   terminateTimer: NodeJS.Timer | undefined;
   multilimeMessageInterval: number = 1000;
-  autoTerminate: boolean = true; // True or False, if True the bot will terminate the lobby when last player leaves and vice versa
+  autoTerminate: boolean = true; // True or False, if True the bot will terminate the lobby when last player leaves and vice versa.
 
   constructor(lobby: Lobby, option: Partial<LobbyTerminatorOption> = {}, autoTerminate: boolean = true) {
     super(lobby, 'LobbyTerminator', 'terminator');
