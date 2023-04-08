@@ -10,7 +10,7 @@ export interface LobbyTerminatorOption {
 export class LobbyTerminator extends LobbyPlugin {
   option: LobbyTerminatorOption;
   terminateTimer: NodeJS.Timer | undefined;
-  multilimeMessageInterval: number = 727;
+  multilimeMessageInterval: number = 7227;
 
   constructor(lobby: Lobby, option: Partial<LobbyTerminatorOption> = {}) {
     super(lobby, 'LobbyTerminator', 'terminator');
