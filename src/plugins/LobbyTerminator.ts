@@ -10,13 +10,11 @@ export interface LobbyTerminatorOption {
 export class LobbyTerminator extends LobbyPlugin {
   option: LobbyTerminatorOption;
   terminateTimer: NodeJS.Timer | undefined;
-  multilimeMessageInterval: number = 1000;
-  autoTerminate: boolean = true; // True or False, if True the bot will terminate the lobby when last player leaves and vice versa.
+  multilimeMessageInterval: number = 727;
 
-  constructor(lobby: Lobby, option: Partial<LobbyTerminatorOption> = {}, autoTerminate: boolean = true) {
+  constructor(lobby: Lobby, option: Partial<LobbyTerminatorOption> = {}) {
     super(lobby, 'LobbyTerminator', 'terminator');
     this.option = getConfig(this.pluginName, option) as LobbyTerminatorOption;
-    this.autoTerminate = autoTerminate;
     this.registerEvents();
   }
 
@@ -24,7 +22,7 @@ export class LobbyTerminator extends LobbyPlugin {
     this.lobby.PlayerLeft.on(p => this.onPlayerLeft(p.player));
     this.lobby.PlayerJoined.on(p => this.onPlayerJoined(p.player, p.slot));
     this.lobby.LeftChannel.on(p => {
-      if (this.autoTerminate && this.terminateTimer) {
+      if (this.terminateTimer) {
         clearTimeout(this.terminateTimer);
       }
     });
@@ -39,7 +37,7 @@ export class LobbyTerminator extends LobbyPlugin {
   }
 
   private onPlayerLeft(p: Player): void {
-    if (this.autoTerminate && this.lobby.players.size === 0) {
+    if (this.lobby.players.size === 0) {
       if (this.terminateTimer) {
         clearTimeout(this.terminateTimer);
       }
@@ -53,7 +51,7 @@ export class LobbyTerminator extends LobbyPlugin {
 
   CloseLobby(time_ms: number = 0): void {
     if (time_ms === 0) {
-      if (this.autoTerminate && this.lobby.players.size === 0) {
+      if (this.lobby.players.size === 0) {
         this.logger.info('Terminated the lobby.');
         this.lobby.CloseLobbyAsync();
       } else {
