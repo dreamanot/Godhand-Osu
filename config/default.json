@@ -58,7 +58,7 @@
     "title": null
   },
   "LobbyTerminator": {
-    "terminate_time_ms": 60000
+    "terminate_time_ms": 999999999999999999999999999999999999999999999999999999999999999
   },
   "MapChecker": {
     "enabled": true,
