@@ -1,3 +1,4 @@
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LobbyTerminator = void 0;
 const LobbyPlugin_1 = require("./LobbyPlugin");
